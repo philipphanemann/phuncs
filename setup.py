@@ -14,6 +14,9 @@ setup(name='phuncs',
       author_email='philipp.hanemann@posteo.de',
       license='MIT',
       packages=['phuncs'],
-      install_requires=[],
+      install_requires=[
+          'numpy',
+          'pandas'
+      ],
       include_package_data=True,
       zip_safe=False)
