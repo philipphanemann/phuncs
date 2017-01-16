@@ -1,7 +1,7 @@
 from phuncs.pandasadd import sliding_window, series_to_batches
 import pytest
 from collections import namedtuple
-from numpy import array, array_equal, atleast_2d, arange
+from numpy import array, array_equal, arange
 from pandas import Series
 
 Window = namedtuple('Window', ['sequence', 'step_length'])
@@ -18,8 +18,8 @@ def test_sliding_window(test_input, expected):
 
 
 @pytest.mark.parametrize("test_input,expected", [
-    (Window(range(5), 5), atleast_2d(arange(5))),
     (Window(range(5), 4), array((arange(4), arange(1, 5)))),
+    (Window(range(5), 5), array(arange(5), ndmin=2)),
     (Window(range(5), 3), array(list(arange(*x) for x in
                                      ((0, 3), (1, 4), (2, 5))))),
     (Window(range(5), 2), array(list(arange(*x) for x in
