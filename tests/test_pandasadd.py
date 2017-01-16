@@ -18,8 +18,8 @@ def test_sliding_window(test_input, expected):
 
 
 @pytest.mark.parametrize("test_input,expected", [
-    (Window(range(5), 4), array((arange(4), arange(1, 5)))),
     (Window(range(5), 5), array(arange(5), ndmin=2)),
+    (Window(Series(range(5)), 4), array((arange(4), arange(1, 5)))),
     (Window(range(5), 3), array(list(arange(*x) for x in
                                      ((0, 3), (1, 4), (2, 5))))),
     (Window(range(5), 2), array(list(arange(*x) for x in
@@ -28,4 +28,4 @@ def test_sliding_window(test_input, expected):
 ])
 def test_series_to_batches(test_input, expected):
     series, n = test_input.sequence, test_input.step_length
-    assert array_equal(series_to_batches(Series(series), n), expected)
+    assert array_equal(series_to_batches(sequence, n), expected)
