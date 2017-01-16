@@ -24,3 +24,16 @@ def series_to_batches(series, step_length):
     step_lengt: size of each sub series
     """
     return array(list(sliding_window(series, step_length)))
+
+
+def series_to_batches_predicted(series, step_length, pred_length=1):
+    """ return 2D!! array of subarray with predicted_length [batches x predicted length]
+
+    series: pandas series, numpy array or iterable
+    step_length: data that is given/not predicted
+    pred_length: prediction length. Default is on step foreward
+    """
+    all_vals = series_to_batches(series, pred_length)
+    return all_vals[step_length:]
+
+
