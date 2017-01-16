@@ -18,9 +18,9 @@ def sliding_window(seq, n=2):
 
 
 def series_to_batches(series, step_length):
-    """ return 2D!! array of subarrays with step_length [subseries x step_length]
+    """ return 2D!! array of subarrays with step_length [batches x step_length]
 
-    series: pandas series, numpy array, or iterator
+    series: pandas series, numpy array or iterable
     step_lengt: size of each sub series
     """
     return array(list(sliding_window(series, step_length)))

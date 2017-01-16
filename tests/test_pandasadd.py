@@ -4,7 +4,7 @@ from collections import namedtuple
 from numpy import array, array_equal, atleast_2d, arange
 from pandas import Series
 
-Window = namedtuple('Window', ['seq', 'n'])
+Window = namedtuple('Window', ['sequence', 'step_length'])
 
 
 @pytest.mark.parametrize("test_input,expected", [
@@ -13,7 +13,7 @@ Window = namedtuple('Window', ['seq', 'n'])
     (Window('hello', 5), [tuple('hello')])
 ])
 def test_sliding_window(test_input, expected):
-    seq, n = test_input.seq, test_input.n
+    seq, n = test_input.sequence, test_input.step_length
     assert list(sliding_window(seq, n)) == expected
 
 
@@ -27,5 +27,5 @@ def test_sliding_window(test_input, expected):
     (Window(list('hello'), 4), array(list((list('hell'), list('ello')))))
 ])
 def test_series_to_batches(test_input, expected):
-    series, n = test_input.seq, test_input.n
+    series, n = test_input.sequence, test_input.step_length
     assert array_equal(series_to_batches(Series(series), n), expected)
