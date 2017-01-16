@@ -13,8 +13,8 @@ Window = namedtuple('Window', ['sequence', 'step_length'])
     (Window('hello', 5), [tuple('hello')])
 ])
 def test_sliding_window(test_input, expected):
-    seq, n = test_input.sequence, test_input.step_length
-    assert list(sliding_window(seq, n)) == expected
+    sequence, n = test_input
+    assert list(sliding_window(sequence, n)) == expected
 
 
 @pytest.mark.parametrize("test_input,expected", [
@@ -27,5 +27,5 @@ def test_sliding_window(test_input, expected):
     (Window(list('hello'), 4), array(list((list('hell'), list('ello')))))
 ])
 def test_series_to_batches(test_input, expected):
-    series, n = test_input.sequence, test_input.step_length
+    sequence, n = test_input
     assert array_equal(series_to_batches(sequence, n), expected)
