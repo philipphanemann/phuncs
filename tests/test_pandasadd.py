@@ -1,12 +1,12 @@
 from phuncs.pandasadd import (sliding_window, series_to_input_batches,
-                              series_to_batches_predicted)
+                              series_to_output_batches)
 import pytest
 from collections import namedtuple
 from numpy import array, array_equal, arange
 from pandas import Series
 
 Window = namedtuple('Window', ['sequence', 'step_length'])
-Forecast = namedtuple('Forecast', ['sequence', 'step_length', 'pred_length'])
+Forecast = namedtuple('Forecast', ['sequence', 'step_length', 'out_length'])
 
 
 @pytest.mark.parametrize("test_input,expected", [
@@ -40,8 +40,8 @@ def test_series_to_input_batches(test_input, expected):
     (Forecast(Series(range(10)), 7, 2), array([[7, 8], [8, 9]])),
     (Forecast(range(10), 5, 4), array([[5, 6, 7, 8], [6, 7, 8, 9]]))
 ])
-def test_series_to_predicted_values(test_input, expected):
+def test_series_to_output_batches(test_input, expected):
     series, n_step, n_pred = test_input
-    calculated = series_to_batches_predicted(series, n_step, n_pred)
+    calculated = series_to_output_batches(series, n_step, n_pred)
     assert array_equal(calculated, expected)
 
