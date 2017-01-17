@@ -1,4 +1,4 @@
-from phuncs.pandasadd import (sliding_window, series_to_batches,
+from phuncs.pandasadd import (sliding_window, series_to_input_batches,
                               series_to_batches_predicted)
 import pytest
 from collections import namedtuple
@@ -28,9 +28,9 @@ def test_sliding_window(test_input, expected):
                                      ((0, 2), (1, 3), (2, 4), (3, 5))))),
     (Window(list('hello'), 4), array(list((list('hell'), list('ello')))))
 ])
-def test_series_to_batches(test_input, expected):
+def test_series_to_input_batches(test_input, expected):
     sequence, n = test_input
-    assert array_equal(series_to_batches(sequence, n), expected)
+    assert array_equal(series_to_input_batches(sequence, n), expected)
 
 
 @pytest.mark.parametrize("test_input,expected", [

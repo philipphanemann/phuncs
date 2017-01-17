@@ -17,7 +17,7 @@ def sliding_window(seq, n=2):
         yield result
 
 
-def series_to_batches(series, step_length):
+def series_to_input_batches(series, step_length):
     """ return 2D!! array of subarrays with step_length [batches x step_length]
 
     series: pandas series, numpy array or iterable
@@ -33,7 +33,7 @@ def series_to_batches_predicted(series, step_length, pred_length=1):
     step_length: data that is given/not predicted
     pred_length: prediction length. Default is on step foreward
     """
-    all_vals = series_to_batches(series, pred_length)
+    all_vals = series_to_input_batches(series, pred_length)
     return all_vals[step_length:]
 
 
