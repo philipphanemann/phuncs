@@ -21,7 +21,7 @@ def series_to_input_batches(series, step_length):
     """ return 2D!! array of subarrays with step_length [batches x step_length]
 
     series: pandas series, numpy array or iterable
-    step_lengt: size of each sub series
+    step_length: size of each sub series
     """
     return array(list(sliding_window(series, step_length)))
 
