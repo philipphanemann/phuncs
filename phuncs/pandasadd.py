@@ -37,3 +37,21 @@ def series_to_output_batches(series, step_length, out_length=1):
     return all_vals[step_length:]
 
 
+def series_to_model_batches(series, step_length, out_length=1):
+    """ returns a tuple with two 2D input and output arrays of batches
+
+    series: pandas series, numpy array or iterable
+    step_length: data that is given/not predicted
+    pred_length: prediction length. Default is on step foreward
+
+    return: (X, Y)
+        X: array [batches x step_length]
+        Y: array [batches x out_length]
+
+    it can be conceived as one dimensional vectors (scalars) for each time step
+    """
+
+    Y = series_to_output_batches(series, step_length, out_length)
+    n_batches = len(Y)
+    X = series_to_input_batches(series, step_length)[:n_batches]
+    return X, Y

@@ -1,5 +1,7 @@
 from phuncs.pandasadd import (sliding_window, series_to_input_batches,
-                              series_to_output_batches)
+                              series_to_output_batches,
+                              series_to_model_batches
+                              )
 import pytest
 from collections import namedtuple
 from numpy import array, array_equal, arange
@@ -45,3 +47,13 @@ def test_series_to_output_batches(test_input, expected):
     calculated = series_to_output_batches(series, n_step, n_pred)
     assert array_equal(calculated, expected)
 
+
+@pytest.mark.parametrize("test_input,expected", [
+    (Forecast(range(5), 4, 1), (array(range(4), ndmin=2), array(4, ndmin=2)))
+])
+def test_series_to_model_batches(test_input, expected):
+    series, n_step, n_pred = test_input
+    X_calc, Y_calc = series_to_model_batches(series, n_step, n_pred)
+    X_expected, Y_expected = expected
+    print(X_calc)
+    assert array_equal(X_calc, X_expected) and array_equal(Y_calc, Y_expected)
